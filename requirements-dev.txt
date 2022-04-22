@@ -1,0 +1,9 @@
+mypy>=0.910
+pre-commit>=2.16.0
+pytest>=6.0.0
+pytest-cov>=3.0.0
+pytest-mock>=3.6.1
+black >=21.12b0
+hypothesis>=6.31.6
+genbadge[all]
+coverage
