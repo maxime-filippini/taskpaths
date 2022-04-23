@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ae7ec0e72e2b3663c99f638cbabf24fde490bdc2190372d4eb03a59cc33d9432"
+            "sha256": "f55a81d5ec926dd2451012015a52b2c06deacf39f5e1195e3d17f7d188ac11ed"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -116,6 +116,10 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.16.0"
+        },
+        "taskpaths": {
+            "path": ".",
+            "version": "==0.0.0"
         },
         "toml": {
             "hashes": [
@@ -315,13 +319,12 @@
             "version": "==1.0.6"
         },
         "hypothesis": {
-            "extras": [],
             "hashes": [
-                "sha256:620ffa1782f9cb0b732b66b811d11c3beeb678b96fae947740aaab1dfd74a996",
-                "sha256:8b43dd0154f5918b0faa3f9d59f5552d9c8671073f6b906c797a8505fd5d09c3"
+                "sha256:92b7a7d6f0829d48bc1f87c496dfa601eb9d815549bb12daa601184807733c5b",
+                "sha256:9d17ebf4137e15f6db24793dad7268b8b5afcfc78b770f307c94872f1d96850a"
             ],
             "index": "pypi",
-            "version": "==6.44.0"
+            "version": "==6.45.0"
         },
         "identify": {
             "hashes": [
