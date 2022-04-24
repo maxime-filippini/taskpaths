@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pre-commit = "*"
-taskpaths = {path = "."}
+taskpaths = {editable = true, path = "."}
 
 [dev-packages]
 mypy = ">=0.910"

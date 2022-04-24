@@ -1,5 +1,11 @@
+from __future__ import annotations
+
 from abc import ABC
 from abc import abstractmethod
+from dataclasses import dataclass
+from dataclasses import field
+from typing import Any
+from typing import List
 
 
 class BaseStep(ABC):
@@ -17,6 +23,10 @@ class BaseStep(ABC):
     def id_(self):
         return self._id
 
+    @id_.setter
+    def id_(self, v):
+        self._id = v
+
     @property
     def value(self):
         return self._value
@@ -25,41 +35,53 @@ class BaseStep(ABC):
     def value(self, v):
         self._value = v
 
-
-class InputStep(BaseStep):
-    has_run = True
-
-    def __init__(self, id_, value):
-        self._id = id_
-        self._value = value
-
-    def run(self, input_dict=None):
-        return self._value
-
-
-class StandardStep(BaseStep):
-    def __init__(self, id_: str, precedents: list[BaseStep]):
-        self._id = id_
-        self._precedents = precedents
-        self._value = None
-
     @property
     def precedents(self):
         return self._precedents
+
+    @precedents.setter
+    def precedents(self, v):
+        self._precedents = v
+
+    def pipe(self, other: Step):
+        other.precedents.append(self)
+        return other
+
+    def __rshift__(self, other: Step):
+        return self.pipe(other)
+
+
+@dataclass
+class Step(BaseStep):
+    id_: str
+    precedents: list[Step] = field(default_factory=list)
+    value: Any = field(init=False)
 
     @abstractmethod
     def instruction(self):
         pass
 
-    def run(self, input_dict=None):
-        if input_dict is None:
-            input_dict = {}
+    def _validate(self):
+        """To be implemented"""
 
+    def run(self):
         # Compute values of precedents, using recursion
         for precedent in self.precedents:
             if not precedent.has_run:
-                precedent.run(input_dict)
+                precedent.run()
 
         # Store the outputs
         prec_dict = {p.id_: p.value for p in self.precedents}
-        self.value = self.instruction(**prec_dict, **input_dict)
+        self.value = self.instruction(**prec_dict)
+
+
+class InputStep(Step):
+    has_run = True
+    max_precedent = 0
+
+    def __init__(self, id_: str, value: Any):
+        self._id = id_
+        self._value = value
+
+    def instruction(self):
+        return self._value

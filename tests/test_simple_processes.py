@@ -2,11 +2,9 @@ import pytest
 from hypothesis import given
 from hypothesis.strategies import floats
 from hypothesis.strategies import integers
-from numpy import product
-from pyparsing import PrecededBy
 
 from taskpaths.process import InputStep
-from taskpaths.process import StandardStep
+from taskpaths.process import Step
 
 
 regular_floats = floats(allow_infinity=False, allow_nan=False)
@@ -15,7 +13,7 @@ regular_numbers = integers() | regular_floats
 
 @pytest.fixture(scope="session")
 def sum_step():
-    class SimpleSumStep(StandardStep):
+    class SimpleSumStep(Step):
         def instruction(self, x, y):
             return x + y
 
@@ -24,7 +22,7 @@ def sum_step():
 
 @pytest.fixture(scope="session")
 def product_step():
-    class SimpleProductStep(StandardStep):
+    class SimpleProductStep(Step):
         def instruction(self, x, y):
             return x * y
 
