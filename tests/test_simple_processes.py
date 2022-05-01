@@ -3,8 +3,8 @@ from hypothesis import given
 from hypothesis.strategies import floats
 from hypothesis.strategies import integers
 
-from taskpaths.process import InputStep
-from taskpaths.process import Step
+from taskpaths import InputStep
+from taskpaths import Step
 
 
 regular_floats = floats(allow_infinity=False, allow_nan=False)

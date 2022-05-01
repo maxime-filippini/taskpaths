@@ -1,5 +1,5 @@
-from taskpaths.process import InputStep
-from taskpaths.process import LambdaStep
+from taskpaths import InputStep
+from taskpaths import LambdaStep
 
 
 def test_simple_process():
