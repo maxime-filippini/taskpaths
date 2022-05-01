@@ -5,7 +5,7 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from dataclasses import field
 from typing import Any
-from typing import List
+from typing import Callable
 
 
 class BaseStep(ABC):
@@ -73,6 +73,14 @@ class Step(BaseStep):
         # Store the outputs
         prec_dict = {p.id_: p.value for p in self.precedents}
         self.value = self.instruction(**prec_dict)
+
+
+@dataclass
+class LambdaStep(Step):
+    lambda_: Callable = lambda x: x
+
+    def instruction(self, *args, **kwargs):
+        return self.lambda_(*args, **kwargs)
 
 
 class InputStep(Step):
